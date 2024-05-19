@@ -1,57 +1,108 @@
-pipeline
+pipeline 
 {
-    
     agent any
-    stages
+    
+    tools{
+    	maven 'maven'
+        }
+
+    stages 
     {
-        stage("Build")
+        stage('Build') 
         {
             steps
             {
-                echo("build the project")
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-        }
-        stage("Deploy to Dev")
-        {
-            steps
+            post 
             {
-                echo("deploying to dev env")
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
-        stage("Deploy to QA")
-        {
-            steps
-            {
-                echo("deploying to QA env")
+        
+        
+        
+        stage("Deploy to QA"){
+            steps{
+                echo("deploy to qa")
             }
         }
-         stage("Run regression automation Test")
-        {
-            steps
-            {
-                echo("Run regression automation Tes")
+        
+        
+                
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/raohariom422/SeleniumDevops.git'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regression.xml"
+                    
+                }
             }
         }
-        stage("Deploy to stage env")
-        {
-            steps
-            {
-                echo("deploying to stage env")
+                
+     
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
             }
         }
-         stage("Run smoke automation Test")
-        {
-            steps
-            {
-                echo("Run smoke automation Tes")
+        
+        
+        stage('Publish Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: true, 
+                                  reportDir: 'reports', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Regression Extent Report', 
+                                  reportTitles: ''])
             }
         }
-        stage("Deploy to prod env")
-        {
-            steps
-            {
-                echo("deploying to prod env")
+        
+        stage("Deploy to Stage"){
+            steps{
+                echo("deploy to Stage")
             }
         }
+        
+        stage('Smoke Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/raohariom422/SeleniumDevops.git'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_smoke.xml"
+                    
+                }
+            }
+        }
+        
+        
+        
+        stage('Publish sanity Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: true, 
+                                  reportDir: 'reports', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Sanity Extent Report', 
+                                  reportTitles: ''])
+            }
+        }
+        
+        
     }
 }
