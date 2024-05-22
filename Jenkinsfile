@@ -108,10 +108,10 @@ pipeline
     post {
         always {
             emailext (
-                to: 'raohariom422@gmail.com', // Email address of the recipient
+                to: 'raohariom422@gmail.com', 
                 subject: "Jenkins Build is success",
-                body: "The build status is passed", // Customize email body
-                mimeType: 'text/plain', // Set email body type
+                body: "The build status is passed", 
+                mimeType: 'text/plain', 
             )
         }
     }
