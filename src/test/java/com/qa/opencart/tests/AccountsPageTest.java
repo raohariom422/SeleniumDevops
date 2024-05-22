@@ -22,7 +22,7 @@ public class AccountsPageTest extends BaseTest {
 	{
 		String actTitle = accPage.getAccPageTitle();
 		Assert.assertEquals(actTitle, AppConstants.Account_PAGE_TITLE_VALUE);
-		System.out.println("jenkins automatic build pipelines latest news");
+		System.out.println("jenkins automatic build pipelines latest news ext");
 		
 	}
 	
