@@ -105,4 +105,14 @@ pipeline
         
         
     }
+    post {
+        always {
+            emailext (
+                to: 'raohariom422@gmail.com', // Email address of the recipient
+                subject: "Jenkins Build is success",
+                body: "The build status is passed", // Customize email body
+                mimeType: 'text/plain', // Set email body type
+            )
+        }
+    }
 }
