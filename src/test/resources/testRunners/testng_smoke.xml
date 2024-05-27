@@ -15,7 +15,10 @@
 
 
 
-	<test name="Login Page Test">
+	<test name="Login Page Test_chrome_ver">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browserversion" value="90.0"></parameter>
+		<parameter name="testcasename" value="Login Page Test ver"></parameter>
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
