@@ -49,10 +49,10 @@ public class OptionsManager {
 		fo = new FirefoxOptions();
 		if(Boolean.parseBoolean(prop.getProperty("remote")))
 		{
-			co.setBrowserVersion(prop.getProperty("browserversion"));
-			co.setCapability("browserName", "firefox");
-			co.setCapability("enableVNC", true);
-			co.setCapability("name", prop.getProperty("testcasename"));
+			fo.setBrowserVersion(prop.getProperty("browserversion"));
+			fo.setCapability("browserName", "firefox");
+			fo.setCapability("enableVNC", true);
+			fo.setCapability("name", prop.getProperty("testcasename"));
 		}
 		if(prop.getProperty("headless").trim().equalsIgnoreCase("true"))
 		{
