@@ -49,10 +49,14 @@ public class OptionsManager {
 		fo = new FirefoxOptions();
 		if(Boolean.parseBoolean(prop.getProperty("remote")))
 		{
+			
 			fo.setBrowserVersion(prop.getProperty("browserversion"));
 			fo.setCapability("browserName", "firefox");
 			fo.setCapability("enableVNC", true);
 			fo.setCapability("name", prop.getProperty("testcasename"));
+			fo.setCapability("marionette", true);
+			fo.addPreference("devtools.debugger.remote-enabled", true);
+			
 		}
 		if(prop.getProperty("headless").trim().equalsIgnoreCase("true"))
 		{

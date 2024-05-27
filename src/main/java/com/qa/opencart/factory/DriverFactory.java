@@ -62,7 +62,7 @@ public class DriverFactory {
 		}
 		else if(browserName.equalsIgnoreCase("firefox"))
 		{
-			WebDriverManager.chromedriver().setup();
+			WebDriverManager.firefoxdriver().setup();
 			if(Boolean.parseBoolean(prop.getProperty("remote")))
 			{
 				// run on remote
@@ -76,14 +76,14 @@ public class DriverFactory {
 		}
 		else if(browserName.equalsIgnoreCase("safari"))
 		{
-			WebDriverManager.chromedriver().setup();
+			//WebDriverManager.chromedriver().setup();
 			
 			//driver = new SafariDriver();
 			tlDriver.set(new SafariDriver());
 		}
 		else if(browserName.equalsIgnoreCase("edge"))
 		{
-			WebDriverManager.chromedriver().setup();
+			//WebDriverManager.chromedriver().setup();
 			if(Boolean.parseBoolean(prop.getProperty("remote")))
 			{
 				// run on remote
