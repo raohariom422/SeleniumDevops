@@ -21,8 +21,9 @@ public class LoginPageTest extends BaseTest{
 	@Severity(SeverityLevel.MINOR)
 	@Description("title of the page.....Author->Hariom")
 	@Test(priority=1)
-	public void loginPageTitleTest()
+	public void loginPageTitleTest() throws InterruptedException
 	{
+		Thread.sleep(3000);
 		String actualTitle = loginPage.getLoginPageTitle();
 		String expectedTitle = AppConstants.LOGIN_PAGE_TITLE_VALUE;
 		Assert.assertEquals(actualTitle, expectedTitle);		
@@ -31,22 +32,25 @@ public class LoginPageTest extends BaseTest{
 	@Severity(SeverityLevel.NORMAL)
 	@Description("url of the page.....Author->Hariom")
 	@Test(priority=2)
-	public void loginPageUrlTest()
+	public void loginPageUrlTest() throws InterruptedException
 	{
+		Thread.sleep(3000);
 		String actualTitle = loginPage.getLoginPageURL();
 		Assert.assertTrue(actualTitle.contains(AppConstants.LOGIN_PAGE_URL_FRACTION_VALUE));
 	}
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("checking frorgot password link exist.....Author->Hariom")
 	@Test(priority=3)
-	public void fogotPwdLinkText()
+	public void fogotPwdLinkText() throws InterruptedException
 	{
+		Thread.sleep(3000);
 		Assert.assertTrue(loginPage.isForgotPwdLinkExist());
 	}
 	
 	@Test(priority=4)
-	public void loginTest()
+	public void loginTest() throws InterruptedException
 	{
+		Thread.sleep(3000);
 		accPage=loginPage.doLogin(prop.getProperty("username").trim(), prop.getProperty("password").trim());
 		Assert.assertTrue(accPage.isLogoutLinkExist());
 		
