@@ -42,14 +42,7 @@
 	</test>
 
 
-<!-- <test name="Accounts Page Test_firefox_83.0">
-	<parameter name="browser" value="firefox"></parameter>
-	<parameter name="browserversion" value="83.0"></parameter>
-	<parameter name="testcasename" value="Accounts Page Test"></parameter>
-		<classes>
-			<class name="com.qa.opencart.tests.AccountsPageTest" />
-		</classes>
-	</test>-->
+
 
  <test name="Registration Page Test_firefox_117">
 	<parameter name="browser" value="firefox"></parameter>
